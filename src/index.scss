@@ -1,0 +1,57 @@
+@use 'sass:map';
+@import url('https://fonts.googleapis.com/css?family=Montserrat:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic');
+@import url('https://fonts.googleapis.com/css?family=Raleway:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic');
+
+$wrapperWidth: (
+	'desktop': 1320px,
+	'tablet': 990px,
+	'mobile': 660px,
+);
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'Raleway', sans-serif;
+	color: white;
+}
+
+button {
+	border: none;
+	background: none;
+	outline-color: transparent;
+	cursor: pointer;
+}
+
+input {
+	border: none;
+	outline: none;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+ul {
+	list-style-type: none;
+}
+
+.wrapper {
+	width: min(100% - 16px, map.get($wrapperWidth, 'desktop'));
+	margin: 0 auto;
+
+	@media (width < 1340px) {
+		width: min(100% - 16px, map.get($wrapperWidth, 'tablet'));
+	}
+
+	@media (width < 1020px) {
+		width: min(100% - 16px, map.get($wrapperWidth, 'mobile'));
+	}
+}
+
+.website {
+	min-height: 100vh;
+	background: linear-gradient(90deg, #133457de, #133457de),
+		url('./assets/background.png') center/cover no-repeat;
+}

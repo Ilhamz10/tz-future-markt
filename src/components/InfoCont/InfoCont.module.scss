@@ -1,0 +1,36 @@
+@use '../../scss/variables/fontSizes';
+@use '../../scss/variables/colors';
+
+.infoCont {
+	border-left: 1px solid #ffffff9c;
+	padding-left: 23.5px;
+	max-width: 200px;
+
+	h2 {
+		font-size: fontSizes.$xl-text;
+		font-family: 'Montserrat', sans-serif;
+	}
+
+	p {
+		margin-top: 32px;
+		font-size: fontSizes.$md-text;
+		color: colors.$secondaryTextColor;
+	}
+
+	p:nth-of-type(2) {
+		display: none;
+		margin-top: 2px;
+	}
+
+	@media (width < 680px) {
+		padding-left: 7.5px;
+        
+		p:nth-of-type(1) {
+			display: none;
+		}
+
+		p:nth-of-type(2) {
+			display: block;
+		}
+	}
+}

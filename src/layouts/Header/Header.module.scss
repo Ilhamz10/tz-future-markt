@@ -1,0 +1,45 @@
+.headerCont {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 40px 0;
+
+	.logo img {
+		height: 34px;
+
+		@media (width < 480px) {
+			height: auto;
+			width: 96px;
+		}
+	}
+
+	.menuBtn {
+		display: none;
+	}
+
+	.contact {
+		display: flex;
+		align-items: center;
+		gap: 14px;
+
+		img {
+			width: 40.96px;
+		}
+
+		p {
+			font-family: 'Montsterrat', sans-serif;
+		}
+	}
+	@media (width < 990px) {
+		.contact {
+			gap: 10px;
+			p {
+				display: none;
+			}
+
+			.menuBtn {
+				display: block;
+			}
+		}
+	}
+}

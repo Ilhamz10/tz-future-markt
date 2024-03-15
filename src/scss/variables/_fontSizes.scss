@@ -1,0 +1,23 @@
+$s-text: clamp(11px, 11px + (14 - 11) * ((100vw - 320px) / (1320 - 320)), 14px);
+$md-text: clamp(
+	11px,
+	11px + (16 - 11) * ((100vw - 320px) / (1320 - 320)),
+	16px
+);
+$lg-text: clamp(
+	10px,
+	10px + (18 - 10) * ((100vw - 320px) / (1320 - 320)),
+	18px
+);
+$xl-text: clamp(
+	16px,
+	16px + (40 - 16) * ((100vw - 320px) / (1320 - 320)),
+	40px
+);
+$xxl-text: clamp(
+	25px,
+	25px + (65 - 25) * ((100vw - 320px) / (1320 - 320)),
+	65px
+);
+$input-textSize: clamp(12px, 12px + (20 - 12) * ((100vw - 320px) / (1320 - 320)), 20px);
+$modal-title-size: clamp(20px, 20px + (50 - 20) * ((100vw - 320px) / (1320 - 320)), 50px);

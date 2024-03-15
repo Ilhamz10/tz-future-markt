@@ -1,0 +1,14 @@
+@use '../../../scss/variables/fontSizes';
+
+.myInput {
+	border-bottom: 1px solid #ffffffcc;
+	font-size: fontSizes.$input-textSize;
+	color: #ffffffcc;
+	width: 100%;
+	background: none;
+	padding-bottom: 10.5px;
+}
+
+.myInput::placeholder {
+	color: inherit;
+}

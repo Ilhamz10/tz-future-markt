@@ -1,0 +1,68 @@
+@use '../../../scss/variables/colors';
+@use '../../../scss/variables/fontSizes';
+
+.fill {
+	background: white;
+	display: flex;
+	align-items: center;
+	height: 71px;
+
+	span {
+		color: colors.$blueTextColor;
+		padding: 0 25px;
+		font-size: fontSizes.$lg-text;
+		font-weight: 600;
+	}
+
+	span:nth-of-type(2) {
+		display: none;
+	}
+
+	.iconCont {
+		border-left: 1px solid colors.$blueTextColor;
+		height: 100%;
+		padding: 0 25px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		svg{
+			transition: .3s;
+		}
+	}
+
+	&:hover .iconCont svg{
+		transform: translate(20%, 20%);
+	}
+
+	@media (width < 660px) {
+		height: 30px;
+
+		svg {
+			width: 8px;
+		}
+
+		span:nth-of-type(1) {
+			display: none;
+		}
+
+		span:nth-of-type(2) {
+			display: inline;
+            width: 100%;
+		}
+	}
+}
+
+.outline {
+	@extend .fill;
+	background: none;
+	border: 1px solid white;
+
+	span {
+		color: white;
+	}
+
+	.iconCont {
+		border-left-color: white;
+	}
+}

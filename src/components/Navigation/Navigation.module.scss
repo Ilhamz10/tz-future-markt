@@ -1,0 +1,21 @@
+@use '../../scss/variables/fontSizes';
+
+.navigation {
+	ul {
+		display: flex;
+		gap: 30px;
+
+		a {
+			color: white;
+			font-size: fontSizes.$s-text;
+            font-family: "Montserrat", sans-serif;
+            font-weight: 400;
+		}
+	}
+
+	@media (width < 990px) {
+		ul{
+			display: none;
+		}
+	}
+}
