@@ -143,16 +143,18 @@ const MainContent = () => {
 					</motion.p>
 					<div className={classes.formContent}>
 						<h2>Закажите обратный звонок</h2>
-						<Input
-							placeholder='ИМЯ'
-							value={nameValue}
-							onChange={(e) => setNameValue(e.target.value)}
-						/>
-						<Input
-							placeholder='ТЕЛЕФОН'
-							value={phoneValue}
-							onChange={(e) => setPhoneValue(e.target.value)}
-						/>
+						<div className={classes.inputCont}>
+							<Input
+								placeholder='ИМЯ'
+								value={nameValue}
+								onChange={(e) => setNameValue(e.target.value)}
+							/>
+							<Input
+								placeholder='ТЕЛЕФОН'
+								value={phoneValue}
+								onChange={(e) => setPhoneValue(e.target.value)}
+							/>
+						</div>
 						<div className={classes.privacyCont}>
 							<input ref={privacyInputRef} type='checkbox' id='privacyPolicy' />
 							<label htmlFor='privacyPolicy'>

@@ -164,7 +164,7 @@
 			bottom: 25px;
 			right: 25px;
 
-			img{
+			img {
 				height: auto;
 				width: 96px;
 			}
@@ -204,6 +204,10 @@
 		height: 80%;
 		margin-top: 40px;
 
+		.inputCont {
+			display: contents;
+		}
+
 		h2 {
 			font-size: fontSizes.$modal-title-size;
 			font-weight: 600;
@@ -233,19 +237,35 @@
 	}
 
 	@media (width < 680px) {
+		min-width: 100%;
 		&.active {
 			padding: 24px 26px 40px 34px !important;
 		}
-		min-width: 100%;
 
 		.formHead svg {
 			width: 20px;
 		}
 
-		.privacyCont {
-			input[type='checkbox'] {
-				min-width: 15px;
-				height: 15px;
+		.formContent {
+			justify-content: start;
+
+			h2 {
+				margin-bottom: 50px;
+			}
+
+			.inputCont{
+				display: grid;
+				gap: 44px;
+			}
+
+			.privacyCont {
+				margin-top: 30px;
+				margin-bottom: 55px;
+
+				input[type='checkbox'] {
+					min-width: 15px;
+					height: 15px;
+				}
 			}
 		}
 	}
