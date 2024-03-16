@@ -2,42 +2,17 @@ import classes from './MainContent.module.scss';
 import mentorImg from '../../assets/mentor.png';
 import Button from '../UI/Button/Button';
 import InfoCont from '../InfoCont/InfoCont';
-import Modal from '../UI/Modal/Modal';
-import Input from '../UI/Input/Input';
 import { useEffect, useRef, useState } from 'react';
-import { motion } from 'framer-motion';
 
-import CloseIcon from '../../assets/close.svg?react';
-import logo from '../../assets/logo.png';
 import { useQuery } from '@tanstack/react-query';
 import { getData } from '../../utils/http';
 import { calculateDateSum } from '../../utils/dateToSum';
-
-const variants = {
-	open: { y: 20 },
-	closed: { y: '-110%' },
-};
-
-const modalVariants = {
-	open: {
-		clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
-		minHeight: '100vh',
-		height: '100%',
-	},
-	closed: {
-		clipPath: 'polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)',
-		minHeight: '0px',
-		height: '0px',
-	},
-};
+import ContactModal from '../ContactModal/ContactModal';
 
 const MainContent = () => {
 	const modalRef = useRef();
-	const privacyInputRef = useRef();
-	const [nameValue, setNameValue] = useState('');
-	const [phoneValue, setPhoneValue] = useState('');
-	const [isError, setIsError] = useState(false);
 	const [isSend, setIsSend] = useState(false);
+
 	const [dateSum, setDateSum] = useState(0);
 
 	const { data, isPending } = useQuery({
@@ -50,6 +25,10 @@ const MainContent = () => {
 		setIsSend(false);
 	}
 
+	function closeModal() {
+		modalRef.current.close();
+	}
+
 	useEffect(() => {
 		const today = new Date();
 		const day = String(today.getDate()).padStart(2, '0');
@@ -60,31 +39,6 @@ const MainContent = () => {
 
 		setDateSum(calculateDateSum(dateString));
 	}, []);
-
-	function formSubmitHandler(e) {
-		e.preventDefault();
-
-		if (
-			nameValue.trim().length === 0 ||
-			phoneValue.trim().length === 0 ||
-			!privacyInputRef.current.checked
-		) {
-			setIsError((prev) => !prev);
-			setTimeout(() => {
-				setIsError((prev) => !prev);
-			}, 1500);
-			return;
-		}
-
-		localStorage.setItem(
-			'userInfo',
-			JSON.stringify({
-				name: nameValue,
-				phone: phoneValue,
-			})
-		);
-		setIsSend(true);
-	}
 
 	return (
 		<div className={classes.mainContent}>
@@ -109,12 +63,12 @@ const MainContent = () => {
 				</div>
 				<div className={classes.mainInfoCont}>
 					<InfoCont
-						title={dateSum}
+						title={dateSum + '+'}
 						text='техник для достижения целей'
 						mobileText='техники'
 					/>
 					<InfoCont
-						title={isPending ? '0' : Math.round(data.Valute.GBP.Value)}
+						title={isPending ? '0' : Math.round(data.Valute.GBP.Value) + '%'}
 						text='увеличение личной продуктивности'
 						mobileText='продуктивности'
 					/>
@@ -124,72 +78,12 @@ const MainContent = () => {
 			<div className={classes.mentorImgCont}>
 				<img src={mentorImg} alt='' />
 			</div>
-			<Modal ref={modalRef}>
-				<motion.form
-					variants={modalVariants}
-					animate={!isSend ? 'open' : 'closed'}
-					className={`${classes.modalForm} ${!isSend ? classes.active : ''}`}
-					onSubmit={formSubmitHandler}>
-					<div className={classes.formHead}>
-						<button type='button' onClick={() => modalRef.current.close()}>
-							<CloseIcon />
-						</button>
-					</div>
-					<motion.p
-						variants={variants}
-						animate={isError ? 'open' : 'closed'}
-						className={classes.errorMessage}>
-						Please fill all fields correctly!
-					</motion.p>
-					<div className={classes.formContent}>
-						<h2>Закажите обратный звонок</h2>
-						<div className={classes.inputCont}>
-							<Input
-								placeholder='ИМЯ'
-								value={nameValue}
-								onChange={(e) => setNameValue(e.target.value)}
-							/>
-							<Input
-								placeholder='ТЕЛЕФОН'
-								value={phoneValue}
-								onChange={(e) => setPhoneValue(e.target.value)}
-							/>
-						</div>
-						<div className={classes.privacyCont}>
-							<input ref={privacyInputRef} type='checkbox' id='privacyPolicy' />
-							<label htmlFor='privacyPolicy'>
-								Согласен на сохранение и обработку персональных данных
-							</label>
-						</div>
-						<div>
-							<Button type={'outline'} mobileText='Заказать обратный звонок'>
-								Заказать обратный звонок
-							</Button>
-						</div>
-					</div>
-				</motion.form>
-				<motion.div
-					variants={modalVariants}
-					animate={isSend ? 'open' : 'closed'}
-					className={classes.modalContent}>
-					<div className={classes.modalHead}>
-						<button type='button' onClick={() => modalRef.current.close()}>
-							<CloseIcon />
-						</button>
-					</div>
-					<div className={classes.modalMain}>
-						<h2>
-							Спасибо <br /> за заявку
-						</h2>
-						<h3>
-							Я обязательно <br /> свяжусь с вами <br /> в ближайшее время.
-						</h3>
-					</div>
-					<div className={classes.logo}>
-						<img src={logo} alt='Logo' />
-					</div>
-				</motion.div>
-			</Modal>
+			<ContactModal
+				ref={modalRef}
+				isSend={isSend}
+				setIsSend={setIsSend}
+				closeModal={closeModal}
+			/>
 		</div>
 	);
 };
